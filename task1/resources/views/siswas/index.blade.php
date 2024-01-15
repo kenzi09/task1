@@ -22,13 +22,39 @@
                 <td>{{ $siswa->name }}</td>
                 <td>{{ $siswa->jurusan }}</td>
                 <td>
-                    <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-primary"><i class="fas fa-pen"></i> EDIT</a>
+                    <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-primary">EDIT</a>
                                         
-                    <button data-toggle="modal" data-target="#modal-hapu{{ $siswa->id }}s" type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> HAPUS</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-hapu{{ $siswa->id }}s">
+                        Hapus
+                      </button>
                 </td>
             </tr>
 
-            <div class="modal fade" id="modal-hapu{{ $siswa->id }}s">
+              
+              <!-- Modal -->
+              <div class="modal fade" id="modal-hapu{{ $siswa->id }}s" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus Data</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>apakah kamu yakin ingin menghapus <b>{{  $siswa->name }}</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{ route('siswa.destroy', $siswa->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Ya Hapus</button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <div class="modal fade" id="">
                 <div class="modal-dialog">
                 <div class="modal-content bg-secondary">
                     <div class="modal-header">
